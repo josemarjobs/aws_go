@@ -40,6 +40,10 @@ func TestUploadPhoto(t *testing.T) {
 
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
+
+	description, _ := writer.CreateFormField("description")
+	io.WriteString(description, "Photo Description")
+
 	part, _ := writer.CreateFormFile("photo", filepath.Base(path))
 	io.Copy(part, file)
 	writer.Close()

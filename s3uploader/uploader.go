@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 
@@ -65,6 +66,9 @@ func (u uploaderManager) Upload(file io.Reader, key string) (*UploadResult, erro
 }
 
 func UploaderHandler(w http.ResponseWriter, r *http.Request) {
+	description := r.FormValue("description")
+	fmt.Println("description ", description)
+
 	file, handler, err := r.FormFile("photo")
 
 	if err != nil {
